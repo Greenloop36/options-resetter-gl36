@@ -126,12 +126,9 @@ def QuitIfNone(Input: any = None, Message: str | None = None):
 
 #     return True
 
-def copy_all_contents(source_dir, target_dir) -> bool: ## no debugging messages as it may slow the program down
-    print("function copy_all_contents")
-    # Check if target directory exists; return False if it doesn't
-    if not os.path.isdir(target_dir):
-        ##print("\t| Target directory does not exist!")
-        return False
+def copy_all_contents(source_dir, target_dir):
+    # Ensure the target directory exists
+    os.makedirs(target_dir, exist_ok=True)
 
     # Iterate over all items in the source directory
     for item in os.listdir(source_dir):
@@ -140,11 +137,8 @@ def copy_all_contents(source_dir, target_dir) -> bool: ## no debugging messages 
 
         # If item is a directory, copy it recursively
         if os.path.isdir(source_item):
-            ##print(f"\t| Item {source_item} is a directory, copying it and its contents")
-            # Ensure the subdirectory exists in the target
-            os.makedirs(target_item, exist_ok=True)
-            # Recursively copy the contents of the subdirectory
-            copy_all_contents(source_item, target_item)
+            os.makedirs(target_item, exist_ok=True)  # Create subdirectory in target if needed
+            copy_all_contents(source_item, target_item)  # Recursive copy for subdirectory
         else:
             # If item is a file, copy it
             shutil.copy2(source_item, target_item)
