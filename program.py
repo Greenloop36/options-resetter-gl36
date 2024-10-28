@@ -8,7 +8,7 @@ import shutil
 import requests
 
 # Configuration
-ThisVersion = "0.1"
+ThisVersion = "1"
 VersionPaste = "https://pastebin.com/raw/ZSQieT8b"
 CopyConfiguration = {
     "settings": {
@@ -98,22 +98,47 @@ def QuitIfNone(Input: any = None, Message: str | None = None):
     if Input == None:
         Quit(Message)
 
-def copy_files(source_dir, target_dir):
-    print("function copy_files")
-    os.makedirs(target_dir, exist_ok=True)
+# def copy_files(source_dir, target_dir):
+#     print("function copy_files")
+#     os.makedirs(target_dir, exist_ok=True)
     
-    # Iterate over all files in the source directory
-    for filename in os.listdir(source_dir):
-        source_file = os.path.join(source_dir, filename)
+#     # Iterate over all files in the source directory
+#     for filename in os.listdir(source_dir):
+#         source_file = os.path.join(source_dir, filename)
         
-        # Only copy files, not directories
-        if os.path.isfile(source_file):
-            print(f"\t| Copy {source_file}")
-            shutil.copy(source_file, target_dir)
-        else:
-            print(f"\t| Ignore {source_file} (is a directory)")
+#         # Only copy files, not directories
+#         if os.path.isfile(source_file):
+#             print(f"\t| Copy {source_file}")
+#             shutil.copy(source_file, target_dir)
+#         else:
+#             print(f"\t| Ignore {source_file} (is a directory)")
 
-    return True
+#     return True
+
+def copy_all_contents(source_dir, target_dir) -> bool: ## no debugging messages as it may slow the program down
+    print("function copy_all_contents")
+    # Check if target directory exists; return False if it doesn't
+    if not os.path.isdir(target_dir):
+        ##print("\t| Target directory does not exist!")
+        return False
+
+    # Iterate over all items in the source directory
+    for item in os.listdir(source_dir):
+        source_item = os.path.join(source_dir, item)
+        target_item = os.path.join(target_dir, item)
+
+        # If item is a directory, copy it recursively
+        if os.path.isdir(source_item):
+            ##print(f"\t| Item {source_item} is a directory, copying it and its contents")
+            # Ensure the subdirectory exists in the target
+            os.makedirs(target_item, exist_ok=True)
+            # Recursively copy the contents of the subdirectory
+            copy_all_contents(source_item, target_item)
+        else:
+            # If item is a file, copy it
+            shutil.copy2(source_item, target_item)
+
+    return True  # Indicate success
 
 
 # Init
@@ -203,7 +228,7 @@ for key, data in CopyConfiguration.items():
             ##print(Target + "\\" + data["Path"])
             Success, Result = None, None
             try:
-                Result = copy_files(CopyFrom + "\\" + data["Path"], Target + "\\" + data["Path"])
+                Result = copy_all_contents(CopyFrom + "\\" + data["Path"], Target + "\\" + data["Path"])
             except Exception as e:
                 Success = False
                 Result = e
