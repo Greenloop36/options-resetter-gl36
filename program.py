@@ -44,27 +44,32 @@ CopyConfiguration = {
 }
 
 ErrorMessageIfNoSuccess = """
-The program did not successfully execute. See the console log for more information.
-This is likely due to an incorrect configuration. Please follow the steps thoroughly before executing the program.
+// Error
+    The program did not successfully execute. See the console log for more information.
+    This is likely due to an incorrect configuration. Please follow the steps thoroughly before executing the program.
 
-Some directories have been created during this operation. Please take care in removing them.
-No files should have been edited or removed.
+    Some directories have been created during this operation. Please take care in removing them.
+    No files should have been edited or removed.
 
 If you encounter further issues, please contact me on Discord (@gl36).
 """
 
 Greeting = """
-Welcome to options resetter, a program created by greenloop36 cause kai is a lazy bitch.
+// Welcome to Options Resetter
+    Welcome to options resetter, a program created by greenloop36 to copy minecraft instance files from one to another.
+    This is to be used for copying data like settings & mod settings from one Forge profile to another.
 
-You will be given two prompts to select a folder.
-The FIRST prompt will be where the program COPIES the settings from,
-The SECOND prompt will be where the program COPIES TO.
+// Usage
+    You will be given two prompts to select a folder.
+    The FIRST prompt will be where the program COPIES the settings from,
+    The SECOND prompt will be where the program COPIES TO.
 
-Please ensure you select the correct folder!
+    Please ensure you select the correct folder!
 
-A video tutorial is present within this folder. Please watch it before continuing.
+    A video tutorial is present within this folder. Please watch it before continuing.
 
-Actions made by this program CANNOT BE UNDONE! You should create backups of your modpacks if necessary.
+// Disclaimer
+    Actions made by this program CANNOT BE UNDONE! You should create backups of your modpacks if necessary.
 """
 
 ProgramTitle = "Options Resetter (Release " + ThisVersion + ")"
@@ -86,7 +91,7 @@ def CheckForUpdate():
         if response.status_code == 200:
             if ThisVersion != response.text:
                 print(f"An update is available. ({ThisVersion} -> {response.text})")
-                gui.msgbox(title = ProgramTitle, msg = f"An update is available! ({ThisVersion} -> {response.text})\n\nRe-install the file from the Google Drive link.\nRemember to re-run 'install.py'!")
+                gui.msgbox(title = ProgramTitle, msg = f"An update is available! (Version {ThisVersion} -> Version {response.text})\n\nRe-install the file from the Google Drive link.\nRemember to re-run 'install.py'!")
             else:
                 print(f"This version, {ThisVersion}, is up to date.")
         else:
@@ -182,7 +187,7 @@ for i in Selection:
     print("\t|", i)
     formattedMessage = formattedMessage + i + "\n    "
 
-Continue = gui.buttonbox(title = ProgramTitle, msg = formattedMessage, choices = ["Cancel", "Continue"], cancel_choice = "Cancel", default_choice = "Continue")
+Continue = gui.buttonbox(title = ProgramTitle, msg = formattedMessage, choices = ["Cancel", "Continue"], cancel_choice = "Cancel", default_choice = "Continue and Start")
 if Continue != "Continue":
     Quit("Cancelled")
 
