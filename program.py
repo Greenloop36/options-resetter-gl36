@@ -8,7 +8,7 @@ import shutil
 import requests
 
 # Configuration
-ThisVersion = "1"
+ThisVersion = "1.0"
 VersionPaste = "https://pastebin.com/raw/ZSQieT8b"
 CopyConfiguration = {
     "settings": {
@@ -34,6 +34,11 @@ CopyConfiguration = {
     "saves": {
         "Display": "My Worlds [UNSTABLE!]",
         "Path": "saves",
+        "IsDirectory": True,
+    },
+    "mods": {
+        "Display": "Mods",
+        "Path": "mods",
         "IsDirectory": True,
     },
 }
