@@ -52,6 +52,7 @@ ErrorMessageIfNoSuccess = """
     No files should have been edited or removed.
 
 If you encounter further issues, please contact me on Discord (@gl36).
+Try repairing or updating your installation via the "update.py" script.
 """
 
 Greeting = """
@@ -91,7 +92,7 @@ def CheckForUpdate():
         if response.status_code == 200:
             if ThisVersion != response.text:
                 print(f"An update is available. ({ThisVersion} -> {response.text})")
-                gui.msgbox(title = ProgramTitle, msg = f"An update is available! (Version {ThisVersion} -> Version {response.text})\n\nRe-install the file from the Google Drive link.\nRemember to re-run 'install.py'!")
+                gui.msgbox(title = ProgramTitle, msg = f"An update is available! (Version {ThisVersion} -> Version {response.text})\n\nPlease run \"update.py\".\nRemember to re-run 'install.py'!")
             else:
                 print(f"This version, {ThisVersion}, is up to date.")
         else:
