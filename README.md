@@ -1,7 +1,7 @@
 # Installation
 1. Once installed, extract the installed file (if zipped),
 2. Run **install.py** and ensure it provides a successful result,
-3. You can now run **progrma.py** to use the application.
+3. You can now run **program.py** to use the application.
 
 **update.py** can be used to repair broken installations or to update the files.
 
