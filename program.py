@@ -1,8 +1,41 @@
 # options resetter
+import sys
+
+## INITIAL CHECKS
+
+# configuration (of init)
+required_modules = ["requests", "easygui"]
+
+# functions
+def IsModuleInstalled(Name):
+    return_code = None
+    module = None
+    
+    try:
+        module = __import__(Name)
+    except ImportError as e:
+        return False, e
+    else:
+        module = None
+        return True, 1
+
+# runtime
+print("Performing initial checks...\n")
+for module in required_modules:
+    print(f"Checking if module \"{module} is present...")
+    Installed, Result = IsModuleInstalled(module)
+
+    if Installed:
+        print(f"\t| {module} is installed.")
+    else:
+        print(f"\t| {module} is not present! Please run install.py before this program.")
+        input("\t| The program will now exit.")
+        sys.exit(f"Missing required dependency \"{module}\"!")
+
+print("\nAll required dependencies are present.")
 
 # variables
 import easygui as gui
-import sys
 import os
 import shutil
 import requests
