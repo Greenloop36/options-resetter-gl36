@@ -13,17 +13,17 @@ def Quit(Message: str = "The program will now exit."):
     sys.exit(0)
 
 def ModuleInstall(Name: str):
-    return_code = None
+    Result = None
 
     try:
-        return_code = subprocess.call(f"pip install {Name}")
+        Result = subprocess.run(f"pip install {Name}")
     except Exception as e:
         return False, e
     else:
-        if return_code == 0:
+        if Result.returncode == 0:
             return True, 1
         else:
-            return False, return_code
+            return False, Result.stderr
 
 def IsModuleInstalled(Name):
     return_code = None
@@ -42,13 +42,13 @@ def IsModuleInstalled(Name):
 ## PIP
 print("Checking if PIP is installed...")
 pip_installed = True
-return_code = -1
+Result = -1
 try:
-    return_code = subprocess.call("pip show pip")
+    Result = subprocess.run("pip show pip")
 except Exception as e:
     pip_installed = False
 finally:
-    if return_code != 0:
+    if Result.returncode != 0:
         pip_installed = False
 
 
@@ -72,8 +72,8 @@ for name in required_modules:
         if Success == True:
             print(f"    | Dependency '{name}' was installed.")
         else:
-            print(f"    | [!] Dependency '{name}' failed to install!")
-            print(f"    |     | {Result}")
+            print(f"    | [!] Dependency '{name}' failed to install!\n\n")
+            print(Result)
 
 
 print("\n\nThe required dependencies are installed. You may exit the installer and use the program.")
