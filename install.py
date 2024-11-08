@@ -16,7 +16,7 @@ def ModuleInstall(Name: str):
     Result = None
 
     try:
-        Result = subprocess.run(f"pip install {Name}")
+        Result = subprocess.run(['cmd', '/c', f'pip install {Name}'], shell=True, capture_output=True, text=True)
     except Exception as e:
         return False, e
     else:
@@ -44,7 +44,7 @@ print("Checking if PIP is installed...")
 pip_installed = True
 Result = -1
 try:
-    Result = subprocess.run("pip show pip")
+    Result = subprocess.run(['cmd', '/c', f'pip show pip'], shell=True, capture_output=True, text=True)
 except Exception as e:
     pip_installed = False
 finally:
