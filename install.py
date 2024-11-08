@@ -44,8 +44,8 @@ print("Checking if PIP is installed...")
 pip_installed = True
 Result = -1
 try:
-    Result = subprocess.run(['cmd', '/c', f'pip show pip'], shell=True, capture_output=True, text=True)
-except Exception as e:
+    Result = subprocess.run(['cmd', '/c', f'pip'], shell=True, capture_output=True, text=True)
+except FileNotFoundError as e:
     pip_installed = False
 finally:
     if Result.returncode != 0:
