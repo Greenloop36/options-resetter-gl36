@@ -41,7 +41,7 @@ import shutil
 import requests
 
 # Configuration
-ThisVersion = "1.0"
+ThisVersion = "1.0.1"
 VersionPaste = "https://pastebin.com/raw/ZSQieT8b"
 CopyConfiguration = {
     "settings": {
