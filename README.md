@@ -1,3 +1,5 @@
+**notice**: this software is no longer being updated
+
 # Installation
 1. Once installed, extract the installed file (if zipped),
 2. Run **install.py** and ensure it provides a successful result,
